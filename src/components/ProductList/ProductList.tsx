@@ -1,18 +1,23 @@
 import React from "react";
-import {ProductType} from "../../App";
-import {ProductCard} from "../ProductCard/ProductCard";
+import {CategoryType, ProductType} from "../../App";
+import {ProductCard} from "./ProductCard/ProductCard";
 import classes from "./ProductList.module.css";
 
 type ProductListType = {
     productsList: ProductType[]
     addToCart: (product: ProductType) => void
-}
-export const ProductList = ({productsList, addToCart}: ProductListType) => {
 
-    const mappedProducts = productsList.map((el) => (
+    filterByCategory: (value: CategoryType) => void
+}
+export const ProductList = ({productsList, addToCart, filterByCategory}: ProductListType) => {
+
+
+    let mappedProducts = productsList.map((el) => (
+
 
         <ProductCard key={el.id}
-            id={el.id}
+                     category={el.category}
+                     id={el.id}
                      src={el.src}
                      title={el.title}
                      description={el.description}
@@ -21,10 +26,16 @@ export const ProductList = ({productsList, addToCart}: ProductListType) => {
                      addToCart={addToCart}/>
     ))
     return (
-        <div >
+        <div>
             <h2>Список товаров:</h2>
+            <div>
+                <div onClick={() => filterByCategory('AllProducts')}>AllProducts</div>
+                <div onClick={() => filterByCategory('Electronics')}>Electronics</div>
+                <div onClick={() => filterByCategory('Clothing')}>Clothing</div>
+                <div onClick={() => filterByCategory('Home Decor')}>Home Decor</div>
+            </div>
             <div className={classes.ProductList}>
-            {mappedProducts}
+                {mappedProducts}
             </div>
         </div>
     );

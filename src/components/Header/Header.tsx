@@ -1,20 +1,29 @@
 import React, {useState} from "react";
-import { ProductType} from "../../App";
-import {ProductList} from "../ProductList/ProductList";
-import {Cart} from "../Cart/Cart";
+import {ProductType} from "../../App";
+import {CartForProducts} from "../CartForProducts/CartForProducts";
 import classes from "./Header.module.css";
 
-type  HeaderType={
-    products:ProductType[]
+type  CartProductsType = {
+    cartProducts: ProductType[]
+    setCartItems: (cartProducts: ProductType[]) => void
 }
-export const Header = ({products}:HeaderType) => {
+export const Header = ({cartProducts, setCartItems}: CartProductsType) => {
+    const [isOpen, setOpened] = useState(false)
+
+    const onClickHandler = () => {
+        setOpened(!isOpen)
+    }
+    const closeCartWindow = () => {
+        setOpened(!isOpen)
+    }
     return (
-        <header  className={classes.header}>
-            <h1>Мой магазин</h1>
-            <Cart cartItems={products}/>
-
-
-            {/*<ProductList productsList={products} addToCart={addToCart}/>*/}
+        <header className={classes.header}>
+            <h3 className={classes.cartTitle} onClick={onClickHandler}>Корзина ({cartProducts.length})</h3>
+            {
+                isOpen ?
+                    <CartForProducts setCartItems={setCartItems} setOpened={setOpened} cartItems={cartProducts}/> :
+                    !isOpen
+            }
         </header>
     );
 };

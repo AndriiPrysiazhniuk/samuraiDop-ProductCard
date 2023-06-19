@@ -2,7 +2,7 @@
 
 .products {
     background-color: #fff;
-    width: 300px;
+    width: 320px;
     height: auto;
     text-align: center;
     padding: 12px;
@@ -40,39 +40,13 @@
     margin-bottom: 16px;
 }
 
-.add-to-cart {
-    display: block;
-    margin: 0 auto;
-    width: 10em;
-    height: 40px;
-    background: #62ff8e;
-    color: white;
-    font-weight: bold;
-    border-radius: 20px;
-}
-
 .add-to-cart:hover {
     background-color: #45a049;
 }
-
 .add-to-cart:active {
     /*background: #62ff8e;*/
     background: #4cea71;
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 .add-to-cart {
     background-color: #4CAF50;
     color: #fff;
@@ -83,7 +57,10 @@
     cursor: pointer;
     transition: background-color 0.3s ease;
 }
-
 .add-to-cart:hover {
     background-color: #45a049;
 }
+.add-to-cart:active {
+    background: #4cea71;
+}
+
