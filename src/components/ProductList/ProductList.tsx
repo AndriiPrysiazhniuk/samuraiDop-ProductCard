@@ -6,10 +6,9 @@ import classes from "./ProductList.module.css";
 type ProductListType = {
     productsList: ProductType[]
     addToCart: (product: ProductType) => void
-
-    filterByCategory: (value: CategoryType) => void
+    setFilter: (value: CategoryType) => void
 }
-export const ProductList = ({productsList, addToCart, filterByCategory}: ProductListType) => {
+export const ProductList = ({productsList, addToCart, setFilter}: ProductListType) => {
 
 
     let mappedProducts = productsList.map((el) => (
@@ -29,10 +28,10 @@ export const ProductList = ({productsList, addToCart, filterByCategory}: Product
         <div>
             <h2>Список товаров:</h2>
             <div>
-                <div onClick={() => filterByCategory('AllProducts')}>AllProducts</div>
-                <div onClick={() => filterByCategory('Electronics')}>Electronics</div>
-                <div onClick={() => filterByCategory('Clothing')}>Clothing</div>
-                <div onClick={() => filterByCategory('Home Decor')}>Home Decor</div>
+                <div onClick={() => setFilter('AllProducts')}>AllProducts</div>
+                <div onClick={() => setFilter('Electronics')}>Electronics</div>
+                <div onClick={() => setFilter('Clothing')}>Clothing</div>
+                <div onClick={() => setFilter('Home Decor')}>Home Decor</div>
             </div>
             <div className={classes.ProductList}>
                 {mappedProducts}

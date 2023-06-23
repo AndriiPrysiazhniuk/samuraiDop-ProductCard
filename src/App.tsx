@@ -1,10 +1,11 @@
-import React, {useState} from 'react';
+import React, {ChangeEvent, KeyboardEvent, useState} from 'react';
 import './App.css';
 import {ProductCard} from "./components/ProductList/ProductCard/ProductCard";
 import {Header} from "./components/Header/Header";
 import {ProductList} from "./components/ProductList/ProductList";
 import {v1} from "uuid";
-export type CategoryType = 'AllProducts'|'Electronics'|'Clothing'|'Home Decor'
+
+export type CategoryType = 'AllProducts' | 'Electronics' | 'Clothing' | 'Home Decor'
 export type ProductType = {
     id: string;
     src: string;
@@ -114,11 +115,11 @@ function App() {
         },
         // Добавьте больше продуктов по вашему желанию
     ]);
-    const [filter, setFilter]=useState<CategoryType>('AllProducts')
+    const [filter, setFilter] = useState<CategoryType>('AllProducts')
     const [cartItems, setCartItems] = useState<ProductType[]>([]);
+    const [searchValue, setSearchValue] = useState('')
 
     const addToCart = (product: ProductType) => {
-
         let newProduct: ProductType = {
             id: product.id,
             src: product.src,
@@ -127,33 +128,46 @@ function App() {
             title: product.title,
             category: product.category
         }
-         setCartItems([...cartItems, newProduct]);
-    };
-    let test: ProductType[] = []
-// let filteredProducts = products
 
-    if(filter=== 'AllProducts'){
-        test =   products
-        // setProducts(  products.filter(el => el.category === 'Clothing'))
+        if (cartItems.length === 0) {
+            setCartItems([...cartItems, newProduct]);
+        }
+    };
+
+
+    const onChangeInputHandler = (event: ChangeEvent<HTMLInputElement>) => setSearchValue(event.currentTarget.value)
+
+    const onClickDeleteButtonHandler = () => setSearchValue('')
+    const onEnterDown = (event: KeyboardEvent<HTMLInputElement>) => {
+        const filteredItems = products.filter(item => item.title.toLowerCase().includes(searchValue.toLowerCase()))
+        event.key === 'Enter' ? setProducts(filteredItems) : setProducts(products)
     }
-    if(filter=== 'Clothing'){
-        test =   products.filter(el => el.category === 'Clothing')
-        // setProducts(  products.filter(el => el.category === 'Clothing'))
+
+    let test: ProductType[] = []
+
+    if (filter === 'AllProducts') {
+        test = products
     }
-    if(filter=== 'Electronics'){
-      test =   products.filter(el => el.category === 'Electronics')
+    if (filter === 'Clothing') {
+        test = products.filter(el => el.category === 'Clothing')
     }
-    if(filter=== 'Home Decor'){
-        test =   products.filter(el => el.category === 'Home Decor')
+    if (filter === 'Electronics') {
+        test = products.filter(el => el.category === 'Electronics')
     }
-    const filterByCategory=(value:CategoryType)=>{
-        setFilter(value)
+    if (filter === 'Home Decor') {
+        test = products.filter(el => el.category === 'Home Decor')
     }
+
 
     return (
         <div className="App">
-            <Header setCartItems={setCartItems} cartProducts={cartItems}/>
-            <ProductList productsList={test} addToCart={addToCart} filterByCategory={setFilter}/>
+            <div>
+                <Header setCartItems={setCartItems} cartProducts={cartItems}/>
+                <input onKeyPress={onEnterDown} value={searchValue} onChange={onChangeInputHandler}
+                       placeholder={'Search...'}/>
+                {searchValue && <button onClick={onClickDeleteButtonHandler}>X</button>}
+            </div>
+            <ProductList productsList={test} addToCart={addToCart} setFilter={setFilter}/>
         </div>
     );
 
