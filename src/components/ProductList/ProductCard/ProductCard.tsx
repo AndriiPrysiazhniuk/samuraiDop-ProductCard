@@ -1,7 +1,6 @@
 import React, {useState} from 'react';
 import './ProductsCard.css';
 import {ProductType} from "../../../App";
-// import {ProductType} from "../../App";
 
 type ProductCardType = {
 
@@ -11,7 +10,6 @@ type ProductCardType = {
 
 export const ProductCard = (props: ProductCardType) => {
   const {category, id, src, title, description, price} = props.product;
-  const [inputValue, setInputValue] = useState('')
 
   const handleAddToCart = () => {
     props.addToCart(props.product)
