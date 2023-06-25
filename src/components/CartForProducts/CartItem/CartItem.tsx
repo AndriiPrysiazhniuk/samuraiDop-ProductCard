@@ -13,8 +13,8 @@ export const CartItem = (props: PropsType) => {
     const {id, src, title, description, price, removeFromCartList} = props
 
     const [quantity, setQuantity] = useState(1)
-    const [inputValue, setInputValue]=useState('')
-    const changeInputValue=(e:ChangeEvent<HTMLInputElement>)=>{
+    const [inputValue, setInputValue] = useState('')
+    const changeInputValue = (e: ChangeEvent<HTMLInputElement>) => {
         setInputValue(e.currentTarget.value)
     }
     const increaseValueHandler = () => setQuantity(quantity !== 10 ? quantity + 1 : quantity)
@@ -32,7 +32,7 @@ export const CartItem = (props: PropsType) => {
                 <div className={classes.cartDescription}>{description}</div>
                 <span>{price * quantity}</span>
                 <div>
-                    <button disabled={quantity === 0} onClick={decreaseValueHandler}>-</button>
+                    <button disabled={quantity === 1} onClick={decreaseValueHandler}>-</button>
                     <input onChange={changeInputValue} className={classes.quantityValue} value={quantity} type="text"/>
                     <button disabled={quantity === 10} onClick={increaseValueHandler}>+</button>
                 </div>

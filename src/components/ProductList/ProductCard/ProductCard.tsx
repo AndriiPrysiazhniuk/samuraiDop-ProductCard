@@ -11,7 +11,7 @@ type ProductCardType = {
     description: string,
     price: number,
     product: ProductType
-    addToCart: (product: ProductType) => void
+    addToCart?: (product: ProductType) => void
 };
 
 export const ProductCard = (props: ProductCardType) => {
@@ -19,7 +19,7 @@ export const ProductCard = (props: ProductCardType) => {
     const [inputValue, setInputValue] = useState('')
 
     const handleAddToCart = () => {
-        addToCart(product);
+        addToCart?.(product)
     };
 
     return (

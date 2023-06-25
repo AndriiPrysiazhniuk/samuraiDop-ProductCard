@@ -3,6 +3,7 @@ import {CategoryType, ProductType} from "../../App";
 import {ProductCard} from "./ProductCard/ProductCard";
 import classes from "./ProductList.module.css";
 
+
 type ProductListType = {
     productsList: ProductType[]
     addToCart: (product: ProductType) => void
@@ -10,9 +11,7 @@ type ProductListType = {
 }
 export const ProductList = ({productsList, addToCart, setFilter}: ProductListType) => {
 
-
     let mappedProducts = productsList.map((el) => (
-
 
         <ProductCard key={el.id}
                      category={el.category}
@@ -31,7 +30,7 @@ export const ProductList = ({productsList, addToCart, setFilter}: ProductListTyp
                 <div onClick={() => setFilter('AllProducts')}>AllProducts</div>
                 <div onClick={() => setFilter('Electronics')}>Electronics</div>
                 <div onClick={() => setFilter('Clothing')}>Clothing</div>
-                <div onClick={() => setFilter('Home Decor')}>Home Decor</div>
+                <div onClick={() => setFilter('Home-Decor')}>Home-Decor</div>
             </div>
             <div className={classes.ProductList}>
                 {mappedProducts}
