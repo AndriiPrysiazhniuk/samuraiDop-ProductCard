@@ -19,8 +19,10 @@ export const ProductCard = (props: ProductCardType) => {
 
   return (
     <div className="products" id={`product-${id}`}>
-      <span>{category}</span>
       <img className="product-image" src={src} alt={title}/>
+      <div>
+        <span>Category: <b>{category}</b></span>
+      </div>
       <p className="product-name">{title}</p>
       <p className="product-description">{description}</p>
       <p className="product-price">price - {price}</p>

@@ -1,7 +1,8 @@
 import React from "react";
-import {CategoryType, ProductType} from "../../App";
+import {ProductType} from "../../App";
 import {ProductCard} from "./ProductCard/ProductCard";
 import classes from "./ProductList.module.css";
+import {CategoryType} from "../../utils/enums";
 
 
 type ProductListType = {
@@ -21,10 +22,10 @@ export const ProductList = ({productsList, addToCart, setFilter}: ProductListTyp
     <div>
       <h2>Список товаров:</h2>
       <div>
-        <div onClick={() => setFilter('AllProducts')}>AllProducts</div>
-        <div onClick={() => setFilter('Electronics')}>Electronics</div>
-        <div onClick={() => setFilter('Clothing')}>Clothing</div>
-        <div onClick={() => setFilter('Home-Decor')}>Home-Decor</div>
+        <div onClick={() => setFilter(CategoryType.AllProducts)}>AllProducts</div>
+        <div onClick={() => setFilter(CategoryType.Electronics)}>Electronics</div>
+        <div onClick={() => setFilter(CategoryType.Clothing)}>Clothing</div>
+        <div onClick={() => setFilter(CategoryType['Home-Decor'])}>Home-Decor</div>
       </div>
       <div className={classes.ProductList}>
         {mappedProducts}

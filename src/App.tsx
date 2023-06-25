@@ -4,8 +4,9 @@ import {Header} from "./components/Header/Header";
 import {ProductList} from "./components/ProductList/ProductList";
 import useLocalStorage from "./hooks/useLocalStorage";
 import {NavigateOptions, useSearchParams} from "react-router-dom";
+import initialDataProducts from "./db/dbProducts";
+import {CategoryType} from "./utils/enums";
 
-export type CategoryType = 'AllProducts' | 'Electronics' | 'Clothing' | 'Home-Decor'
 export type ProductType = {
   id: number;
   src: string;
@@ -15,113 +16,16 @@ export type ProductType = {
   category: CategoryType
 }
 
-const initialData: ProductType[] = [
-  {
-    id: 1,
-    src: 'https://content.rozetka.com.ua/goods/images/big_tile/268099233.jpg',
-    title: 'Product 1',
-    description: 'This is the description of Product 1',
-    price: 19.99,
-    category: 'Electronics',
-  },
-  {
-    id: 2,
-    src: 'https://content.rozetka.com.ua/goods/images/big/284275647.jpg',
-    title: 'Product 2',
-    description: 'This is the description of Product 2',
-    price: 29.99,
-    category: 'Clothing',
-  },
-  {
-    id: 3,
-    src: 'https://images.zakupka.com/i3/firms/27/10994/10994653/shipovki-begovye-xin-jing-ob-555-2-razmer-34-45-siniy-belyy_f08ac14e9bbb1ec_500x500.webp.jpg',
-    title: 'Product 3',
-    description: 'This is the description of Product 3',
-    price: 9.99,
-    category: 'Home-Decor',
-  },
-  {
-    id: 4,
-    src: 'https://premier-dental.com.ua/uploads/product_gallery/foto/26372/i_sensor_h1_dte_woodpecker.jpg',
-    title: 'Product 4',
-    description: 'This is the description of Product 4',
-    price: 19.99,
-    category: 'Electronics',
-  },
-  {
-    id: 5,
-    src: 'https://content.rozetka.com.ua/goods/images/big_tile/268099233.jpg',
-    title: 'Product 5',
-    description: 'This is the description of Product 5',
-    price: 29.99,
-    category: 'Clothing',
-  },
-  {
-    id: 6,
-    src: 'https://content.rozetka.com.ua/goods/images/big_tile/268099233.jpg',
-    title: 'Product 6',
-    description: 'This is the description of Product 6',
-    price: 9.99,
-    category: 'Home-Decor',
-  },
-  {
-    id: 7,
-    src: 'https://content.rozetka.com.ua/goods/images/big/284275647.jpg',
-    title: 'Product 7',
-    description: 'This is the description of Product 7',
-    price: 19.99,
-    category: 'Electronics',
-  },
-  {
-    id: 8,
-    src: 'https://premier-dental.com.ua/uploads/product_gallery/foto/26372/i_sensor_h1_dte_woodpecker.jpg',
-    title: 'Product 8',
-    description: 'This is the description of Product 8',
-    price: 29.99,
-    category: 'Clothing',
-  },
-  {
-    id: 9,
-    src: 'https://images.zakupka.com/i3/firms/27/10994/10994653/shipovki-begovye-xin-jing-ob-555-2-razmer-34-45-siniy-belyy_f08ac14e9bbb1ec_500x500.webp.jpg',
-    title: 'Product 9',
-    description: 'This is the description of Product 9',
-    price: 9.99,
-    category: 'Home-Decor',
-  },
-  {
-    id: 10,
-    src: 'https://content.rozetka.com.ua/goods/images/big_tile/268099233.jpg',
-    title: 'Product 10',
-    description: 'This is the description of Product 10',
-    price: 9.99,
-    category: 'Home-Decor',
-  },
-  {
-    id: 11,
-    src: 'https://premier-dental.com.ua/uploads/product_gallery/foto/26372/i_sensor_h1_dte_woodpecker.jpg',
-    title: 'Product 11',
-    description: 'This is the description of Product 11',
-    price: 9.99,
-    category: 'Home-Decor',
-  },
-  {
-    id: 12,
-    src: 'https://content.rozetka.com.ua/goods/images/big_tile/268099233.jpg',
-    title: 'Product 12',
-    description: 'This is the description of Product 12',
-    price: 9.99,
-    category: 'Home-Decor',
-  },
-]
+
 
 function App() {
-  const [products, setProducts] = useState<ProductType[]>(initialData);
-  const [filter, setFilter] = useState<CategoryType>('AllProducts')
+  const [products, setProducts] = useState<ProductType[]>(initialDataProducts);
+  const [filter, setFilter] = useState<CategoryType>(CategoryType.AllProducts)
   const [cartItems, setCartItems] = useState<ProductType[]>([]);
   const [searchValue, setSearchValue] = useState('')
   const [localStorageValues, setLocalStorageValues] = useLocalStorage('cartItems', cartItems)
   let [searchParams, setSearchParams] = useSearchParams();
-  const filteredItems = (value: string) => initialData.filter(item => item.title.toLowerCase().includes(value.toLowerCase()))
+  const filteredItems = (value: string) => initialDataProducts.filter(item => item.title.toLowerCase().includes(value.toLowerCase()))
 
   const params: NavigateOptions = {}
 
@@ -167,17 +71,17 @@ function App() {
 
   let copyOfProducts: ProductType[] = []
 
-  if (filter === 'AllProducts') {
+  if (filter === CategoryType.AllProducts) {
     copyOfProducts = products
   }
-  if (filter === 'Clothing') {
-    copyOfProducts = products.filter(el => el.category === 'Clothing')
+  if (filter === CategoryType.Clothing) {
+    copyOfProducts = products.filter(el => el.category === CategoryType.Clothing)
   }
-  if (filter === 'Electronics') {
-    copyOfProducts = products.filter(el => el.category === 'Electronics')
+  if (filter === CategoryType.Electronics) {
+    copyOfProducts = products.filter(el => el.category === CategoryType.Electronics)
   }
-  if (filter === 'Home-Decor') {
-    copyOfProducts = products.filter(el => el.category === 'Home-Decor')
+  if (filter === CategoryType['Home-Decor']) {
+    copyOfProducts = products.filter(el => el.category === CategoryType['Home-Decor'])
   }
 
 
