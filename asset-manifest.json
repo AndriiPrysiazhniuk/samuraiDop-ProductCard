@@ -1,15 +1,15 @@
 {
   "files": {
-    "main.css": "/samuraiDop-ProductCard/static/css/main.57214189.css",
-    "main.js": "/samuraiDop-ProductCard/static/js/main.4ebb2627.js",
+    "main.css": "/samuraiDop-ProductCard/static/css/main.8327522e.css",
+    "main.js": "/samuraiDop-ProductCard/static/js/main.20cdbe8c.js",
     "static/js/787.28cb0dcd.chunk.js": "/samuraiDop-ProductCard/static/js/787.28cb0dcd.chunk.js",
     "index.html": "/samuraiDop-ProductCard/index.html",
-    "main.57214189.css.map": "/samuraiDop-ProductCard/static/css/main.57214189.css.map",
-    "main.4ebb2627.js.map": "/samuraiDop-ProductCard/static/js/main.4ebb2627.js.map",
+    "main.8327522e.css.map": "/samuraiDop-ProductCard/static/css/main.8327522e.css.map",
+    "main.20cdbe8c.js.map": "/samuraiDop-ProductCard/static/js/main.20cdbe8c.js.map",
     "787.28cb0dcd.chunk.js.map": "/samuraiDop-ProductCard/static/js/787.28cb0dcd.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.57214189.css",
-    "static/js/main.4ebb2627.js"
+    "static/css/main.8327522e.css",
+    "static/js/main.20cdbe8c.js"
   ]
 }
